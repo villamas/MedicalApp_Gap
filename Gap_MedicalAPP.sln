@@ -1,9 +1,14 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSite", "MedicalSite\MedicalSite.csproj", "{4CF66585-2625-4C61-88CF-FBD04E40D066}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSite", "MedicalSite\MedicalSite.csproj", "{4CF66585-2625-4C61-88CF-FBD04E40D066}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAPI", "MedicalAPI\MedicalAPI.csproj", "{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalAPI", "MedicalAPI\MedicalAPI.csproj", "{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{56DA02AE-6420-4B81-8473-677800B4BC61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalRepos", "MedicalRepos\MedicalRepos.csproj", "{565410B0-44FC-4A73-9291-C67817E25043}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,5 +24,19 @@ Global
 		{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56DA02AE-6420-4B81-8473-677800B4BC61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56DA02AE-6420-4B81-8473-677800B4BC61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56DA02AE-6420-4B81-8473-677800B4BC61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56DA02AE-6420-4B81-8473-677800B4BC61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{565410B0-44FC-4A73-9291-C67817E25043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{565410B0-44FC-4A73-9291-C67817E25043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{565410B0-44FC-4A73-9291-C67817E25043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{565410B0-44FC-4A73-9291-C67817E25043}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4958A8BC-FCEE-49C0-9A8C-941775A766A6}
 	EndGlobalSection
 EndGlobal
