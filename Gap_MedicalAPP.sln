@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalSite", "MedicalSite\MedicalSite.csproj", "{4CF66585-2625-4C61-88CF-FBD04E40D066}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalAPI", "MedicalAPI\MedicalAPI.csproj", "{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CF66585-2625-4C61-88CF-FBD04E40D066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF66585-2625-4C61-88CF-FBD04E40D066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF66585-2625-4C61-88CF-FBD04E40D066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF66585-2625-4C61-88CF-FBD04E40D066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
