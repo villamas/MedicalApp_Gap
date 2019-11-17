@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using DataAccess.Models;
 using MedicalRepos;
 using MedicalRepos.Contracts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,7 +16,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace MedicalAPI.Controllers
 {
 
-   
+    [EnableCors("CorsPolicy")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class CitasController : Controller
     {
@@ -41,7 +45,7 @@ namespace MedicalAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public ActionResult Post([FromBody] Citas citas)
+        public async Task<ActionResult> PostAsync([FromBody] Citas citas)
         {
             dynamic model = new ExpandoObject();
             // model.Citas = this._UOW.CitasRepository.GetAll();
@@ -59,6 +63,7 @@ namespace MedicalAPI.Controllers
             }
 
             this._UOW.CitasRepository.Add(citas);
+            await _UOW.Commit();
             return Ok();
 
          //   this._UOW.CitasRepository.Add(paciente);
@@ -66,7 +71,8 @@ namespace MedicalAPI.Controllers
 
 
         [HttpPost]
-        public ActionResult Cancel([FromBody] Citas citas)
+        [Route("[action]")]
+        public async Task<ActionResult> CancelAsync([FromBody] Citas citas)
         {
             dynamic model = new ExpandoObject();
             // model.Citas = this._UOW.CitasRepository.GetAll();
@@ -77,16 +83,28 @@ namespace MedicalAPI.Controllers
 
             if (dato != null)
             {
-                if (dato.FirstOrDefault().Fecha < citas.Fecha.AddHours(24))
+                if (dato.Any())
                 {
-                    return BadRequest($"Las citas se deben cancelar con mínimo 24 horas de antelación");
+                    if (dato.FirstOrDefault().Fecha < citas.Fecha.AddHours(24))
+                    {
+                        return BadRequest($"Las citas se deben cancelar con mínimo 24 horas de antelación");
+                    }
+
+
+                    this._UOW.CitasRepository.Update(citas);
+                    await _UOW.Commit();
+                    return Ok("Cita cancelada exitosamente!");
                 }
+                else {
+                    return BadRequest($"Sin citas a cancelar");
+                }
+                
+                   
             }
+            return BadRequest($"Sin citas a cancelar");
 
-            this._UOW.CitasRepository.Update(citas);
-            return Ok();
 
-        
+
         }
 
 

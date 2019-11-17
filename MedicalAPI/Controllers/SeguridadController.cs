@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAccess.Models;
-using MedicalRepos;
-using MedicalRepos.Contracts;
+using MedicalAPI.Interface;
+using MedicalAPI.Utilitarios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -18,23 +16,35 @@ namespace MedicalAPI.Controllers
     [EnableCors("CorsPolicy")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
-    public class TipoCitasController : Controller
+    public class SeguridadController : Controller
     {
 
-        private readonly UnitOfWork _UOW;
 
-        public TipoCitasController(IUnitOfWork uOW)
+        private IUserService _userService;
+
+        public SeguridadController(IUserService userService)
         {
-            _UOW = uOW as UnitOfWork;
+            _userService = userService;
         }
 
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody]Usuarios userParam)
+        {
+            var user = _userService.Authenticate(userParam.Username, userParam.Password);
+
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            return Ok(user);
+        }
 
         // GET: api/values
-      /*  [HttpGet]
+        [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
-        }*/
+        }
 
         // GET api/values/5
         [HttpGet("{id}")]
@@ -43,29 +53,10 @@ namespace MedicalAPI.Controllers
             return "value";
         }
 
-        [HttpGet]
-        public ActionResult Get()
-        {
-            dynamic model = new ExpandoObject();
-            model.TipoCitas = this._UOW.TiposCitaRepository.GetAll();
-            return Ok(model.TipoCitas);
-
-
-        }
-
-      /*  // POST api/values
+        // POST api/values
         [HttpPost]
         public void Post([FromBody]string value)
         {
-        }
-        */
-
-        [HttpPost]
-        public async Task<ActionResult> Post([FromBody]TipoCitas tipoCitas)
-        {
-            this._UOW.TiposCitaRepository.Add(tipoCitas);
-            await _UOW.Commit();
-            return Ok("Inserción Exitosa");
         }
 
         // PUT api/values/5

@@ -10,12 +10,16 @@ using MedicalRepos;
 using MedicalRepos.Contracts;
 using DataAccess.Models;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MedicalAPI.Controllers
 {
-   
 
 
+    [EnableCors("CorsPolicy")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class PacientesController : ControllerBase
@@ -40,12 +44,13 @@ namespace MedicalAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Paciente paciente)
+        public async Task<ActionResult> PostAsync([FromBody] Paciente paciente)
         {
 
 
             //  model.Paciente =
             this._UOW.PacienteRepository.Add(paciente);
+            await _UOW.Commit();
             return Ok("Inserción Exitosa");
         }
 
