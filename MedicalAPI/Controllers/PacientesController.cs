@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Dynamic;
 using MedicalRepos;
 using MedicalRepos.Contracts;
+using DataAccess.Models;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace MedicalAPI.Controllers
 {
@@ -37,6 +39,15 @@ namespace MedicalAPI.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult Post([FromBody] Paciente paciente)
+        {
+
+
+            //  model.Paciente =
+            this._UOW.PacienteRepository.Add(paciente);
+            return Ok("Inserción Exitosa");
+        }
 
     }
 }
