@@ -88,14 +88,15 @@ namespace MedicalSite.Controllers
 
 
         }
-
-        public IActionResult CancelarCita()
+        
+        public IActionResult Cancelar(int idCita)
         {
 
 
             ApiUtil<List<CitasViewModel>> apiUtil = new Utilitarios.ApiUtil<List<CitasViewModel>>();
-       
-            var datos = apiUtil.SeguridadApi(null, "/api/TipoCitas/Cancel", HttpContext.Session.GetString("token"));
+            CitasViewModel data = new CitasViewModel();
+            data.idCita = idCita;
+            var datos = apiUtil.SeguridadApiPost(data, "/api/Citas/Cancel", HttpContext.Session.GetString("token"));
 
             if (datos == null)
             {

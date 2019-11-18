@@ -24,7 +24,10 @@
                 @Html.DisplayFor(modelItem => item.nombreMedico)
             </td>
             <td>
-               <a asp-action="CancelarCita"asp-controller="Citas" asp-route-id="@item.idCita">Cancelar</a> |
+                  <form method="post">
+               <a asp-action="Cancelar" type="submit" asp-controller="Citas" asp-route-id="@item.idCita">Cancelar</a>
+                      </form>
+       
                 
             </td>
         </tr>
