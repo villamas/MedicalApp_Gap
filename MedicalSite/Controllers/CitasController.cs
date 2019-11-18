@@ -60,16 +60,12 @@ namespace MedicalSite.Controllers
             // return  View ("AddCita",new Tuple<CitasViewModel, SelectList>)
         }
 
-
+        [HttpPost]
         public IActionResult GuardaCita(CitasViewModel citas)
         {
             ApiUtil<List<CitasViewModel>> apiUtil = new ApiUtil<List<CitasViewModel>>();
             CitasViewModel data = new CitasViewModel();
-            data.nombreMedico = "Prueba medico";
-            data.idTipoCita = 1;
-            data.idPaciente = "303980015";
-            data.fecha = DateTime.Now.AddDays(3);
-            // data = citas;
+            data = citas;
 
             var datos = apiUtil.SeguridadApiPost(data, "/api/Citas/AgregaCita", HttpContext.Session.GetString("token"));
 
@@ -83,29 +79,50 @@ namespace MedicalSite.Controllers
             {
 
                 ViewBag.Message = datos.ToString();
-                ApiUtil<List<TipoCitasViewModel>> apiUtil2 = new Utilitarios.ApiUtil<List<TipoCitasViewModel>>();
-                var x = apiUtil2.SeguridadApi(null, "/api/TipoCitas", HttpContext.Session.GetString("token"));
+                if (!string.IsNullOrEmpty(datos.ToString()))
+                {
+                    ApiUtil<List<TipoCitasViewModel>> apiUtil2 = new Utilitarios.ApiUtil<List<TipoCitasViewModel>>();
+                    var x = apiUtil2.SeguridadApi(null, "/api/TipoCitas", HttpContext.Session.GetString("token"));
 
-                SelectList ListaTipoCitas = new SelectList((List<TipoCitasViewModel>)x, "IdTipoCita", "Descripcion");
+                    SelectList ListaTipoCitas = new SelectList((List<TipoCitasViewModel>)x, "IdTipoCita", "Descripcion");
 
 
-                var tupleData = new Tuple<CitasViewModel, SelectList>(new CitasViewModel(), (Microsoft.AspNetCore.Mvc.Rendering.SelectList)ListaTipoCitas.AsEnumerable());
-                return View("AddCita", tupleData);
+                    var tupleData = new Tuple<CitasViewModel, SelectList>(new CitasViewModel(), (Microsoft.AspNetCore.Mvc.Rendering.SelectList)ListaTipoCitas.AsEnumerable());
+                    return View("AddCita", tupleData);
+                }
+                else
+                {
+                    // ApiUtil<List<CitasViewModel>> apiUtil3 = new Utilitarios.ApiUtil<List<CitasViewModel>>();
+                    datos = apiUtil.SeguridadApi(null, "/api/Citas", HttpContext.Session.GetString("token"));
 
+                    if (datos == null)
+                    {
+                        ViewBag.Message = "Unauthorized!";
+                        return View("../Login/Login");
+                    }
+                    else
+                    {
+
+                        return View("Citas", datos);
+
+                    }
+
+
+                }
             }
 
 
         }
 
-        public IActionResult Cancelar(CitasViewModel citas)
+        public IActionResult Cancelar(string idPaciente)
         {
 
 
             ApiUtil<List<CitasViewModel>> apiUtil = new Utilitarios.ApiUtil<List<CitasViewModel>>();
             CitasViewModel data = new CitasViewModel();
-            data = citas;
-           // data.idPaciente = idPaciente;
-           // data.fecha = DateTime.Now;
+           // data = citas;
+            data.idPaciente = idPaciente;
+            data.fecha = DateTime.Now;
             var datos = apiUtil.SeguridadApiPost(data, "/api/Citas/Cancel", HttpContext.Session.GetString("token"));
 
             if (datos == null)

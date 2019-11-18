@@ -105,11 +105,18 @@ namespace MedicalAPI.Controllers
                     {
                         return BadRequest($"Las citas se deben cancelar con mínimo 24 horas de antelación");
                     }
+                    else
+                    {
+                   
+                        dato.FirstOrDefault().Estado = false;
+                        this._UOW.CitasRepository.Update(dato.FirstOrDefault());
+                        await _UOW.Commit();
+                        return Ok("Cita cancelada exitosamente!");
+
+                    }
 
 
-                    this._UOW.CitasRepository.Update(citas);
-                    await _UOW.Commit();
-                    return Ok("Cita cancelada exitosamente!");
+                   
                 }
                 else
                 {

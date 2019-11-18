@@ -1,6 +1,4 @@
 ﻿@model Tuple<MedicalSite.Models.CitasViewModel, SelectList>
-@using (Html.BeginForm())
-{
     <div>
         <form method="Post" asp-action="GuardaCita" asp-controller="Citas">
             <div>
@@ -30,13 +28,13 @@
                     <input type="date" asp-for="Item1.fecha" name="fecha" class="form-control">
                 </div>
                 <div>
-                    <button type="submit">
+                    <button type="submit" >
                         Guardar Cita
                     </button>
+                 
 
                 </div>
                 <h2>@Html.Raw(@ViewBag.Message)</h2>
             </div>
         </form>
     </div>
-}

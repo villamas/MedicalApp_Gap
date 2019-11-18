@@ -27,7 +27,7 @@ namespace MedicalSite.Controllers
         {
             HttpContext.Session.Remove("token");
             ViewBag.Message = "User logged out successfully!";
-            return View("Index");
+            return View("../Login/Login");
         }
 
         public IActionResult Login(string Username, string password)
@@ -81,7 +81,7 @@ namespace MedicalSite.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("../Login/Login");
         }
 
         public IActionResult Privacy()

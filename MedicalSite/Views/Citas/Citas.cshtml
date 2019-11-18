@@ -4,7 +4,7 @@
     ViewData["Title"] = "Listado de Citas";
 }
 
-<h2>Index</h2>
+<h2>Citas</h2>
 
 <p>
     <a asp-action="NuevaCita" >Nueva Cita</a>
@@ -25,7 +25,7 @@
             </td>
             <td>
                 
-                    <a asp-action="Cancelar" type="submit" asp-controller="Citas"  asp-route-id="@item.idPaciente">Cancelar</a>
+                    <a asp-action="Cancelar" type="submit" asp-controller="Citas"  asp-route-idPaciente="@item.idPaciente">Cancelar</a>
              
 
                 
