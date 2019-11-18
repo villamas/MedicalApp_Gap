@@ -1,0 +1,39 @@
+﻿@model Tuple<MedicalSite.Models.CitasViewModel, SelectList>
+@using (Html.BeginForm())
+{
+<div>
+    <form method="Post">
+        <div>
+
+            <div class="form-group">
+                <label asp-for="Item1.idPaciente" class="Control-label"></label>
+                <label class="control-label col-md-2" for="Id Paciente" />
+                <input asp-for="Item1.idPaciente" class="form-control" />
+                @Html.TextBoxFor(model => model.Item1.idPaciente)
+            </div>
+
+            <div class="form-group">
+                         <label class="control-label col-md-2"  for="Item1.idTipoCita" />
+                <div class="col-md-10">
+                    <select asp-for="Item1.idTipoCita" asp-items="@Model.Item2"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                   <label class="control-label col-md-2" for="Item1.nombreMedico" />
+                <input asp-for="Item1.nombreMedico" class="form-control" />
+            </div>          
+            <div class="form-group">
+                        <label class="control-label col-md-2" for="Item1.fecha" />
+                <input  type="date" asp-for="Item1.fecha" class="form-control">
+            </div>
+            <div>
+                <button type="submit" asp-action="GuardaCita"
+                        asp-controller="Citas">
+                    Guardar Cita
+                </button>
+
+            </div>
+        </div>
+    </form>
+    </div>
+}

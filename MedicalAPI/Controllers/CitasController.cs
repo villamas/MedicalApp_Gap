@@ -1,24 +1,28 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAccess.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Dynamic;
 using MedicalRepos;
 using MedicalRepos.Contracts;
+using DataAccess.Models;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MedicalAPI.Controllers
 {
-
     [EnableCors("CorsPolicy")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
+    [ApiController]
     public class CitasController : Controller
     {
         private readonly UnitOfWork _UOW;
@@ -29,11 +33,22 @@ namespace MedicalAPI.Controllers
         }
 
 
-        // GET: api/values
+
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            dynamic model = new ExpandoObject();
+            model.Citas = this._UOW.CitasRepository.GetAll().Where(x => x.Estado).ToList();
+
+          /* model.Citas = from c in Data
+                          where c.Estado  
+                          select c;*/
+
+            return Ok(model.Citas);
+
+
+
         }
 
         // GET api/values/5
@@ -49,9 +64,9 @@ namespace MedicalAPI.Controllers
         {
             dynamic model = new ExpandoObject();
             // model.Citas = this._UOW.CitasRepository.GetAll();
-            var dato = from c in this._UOW.CitasRepository.GetAll()
-                       where c.Estado.Equals(true) && c.Fecha.Equals(citas.Fecha) && c.IdPaciente.Equals(citas.IdPaciente)
-                       select c;
+            var dato = this._UOW.CitasRepository.GetAll().Where(x => x.Estado && x.Fecha.Equals(citas.Fecha) && x.IdPaciente.Equals(citas.IdPaciente)).ToList();
+          //  where c.Estado.Equals(true) && c.
+            //           select c;
 
 
             if (dato != null)
@@ -66,7 +81,7 @@ namespace MedicalAPI.Controllers
             await _UOW.Commit();
             return Ok();
 
-         //   this._UOW.CitasRepository.Add(paciente);
+            //   this._UOW.CitasRepository.Add(paciente);
         }
 
 
@@ -76,9 +91,9 @@ namespace MedicalAPI.Controllers
         {
             dynamic model = new ExpandoObject();
             // model.Citas = this._UOW.CitasRepository.GetAll();
-            var dato = from c in this._UOW.CitasRepository.GetAll()
-                       where c.Estado.Equals(true) && c.IdPaciente.Equals(citas.IdPaciente)
-                       select c;
+            var dato = this._UOW.CitasRepository.GetAll().Where(x => x.Estado && x.IdPaciente.Equals(citas.IdPaciente)).ToList();
+                    //   where c.Estado.Equals(true) && c.IdPaciente.Equals(citas.IdPaciente)
+                      // select c;
 
 
             if (dato != null)
@@ -95,11 +110,12 @@ namespace MedicalAPI.Controllers
                     await _UOW.Commit();
                     return Ok("Cita cancelada exitosamente!");
                 }
-                else {
+                else
+                {
                     return BadRequest($"Sin citas a cancelar");
                 }
-                
-                   
+
+
             }
             return BadRequest($"Sin citas a cancelar");
 

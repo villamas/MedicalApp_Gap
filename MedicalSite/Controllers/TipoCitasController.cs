@@ -1,47 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using MedicalSite.Models;
+using MedicalSite.Utilitarios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MedicalSite.Controllers
 {
-    public class PacienteController : Controller
+    public class TipoCitasController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
+
         public IActionResult ShowData()
         {
-            string baseUrl = "https://localhost:5001";
-            HttpClient client = new HttpClient
-            {
-                BaseAddress = new Uri(baseUrl)
-            };
-            var contentType = new MediaTypeWithQualityHeaderValue
-        ("application/json");
-            client.DefaultRequestHeaders.Accept.Add(contentType);
+            /* string baseUrl = "https://localhost:5001";
+             HttpClient client = new HttpClient
+             {
+                 BaseAddress = new Uri(baseUrl)
+             };
+             var contentType = new MediaTypeWithQualityHeaderValue
+         ("application/json");
+             client.DefaultRequestHeaders.Accept.Add(contentType);
 
-            client.DefaultRequestHeaders.Authorization =
-        new AuthenticationHeaderValue("Bearer",
-        HttpContext.Session.GetString("token"));
+             client.DefaultRequestHeaders.Authorization =
+         new AuthenticationHeaderValue("Bearer",
+         HttpContext.Session.GetString("token"));
 
-            HttpResponseMessage response = client.GetAsync
-        ("/api/Paciente").Result;
-            string stringData = response.Content.
-        ReadAsStringAsync().Result;
-            List<PacienteViewModel> data = JsonConvert.DeserializeObject
-        <List<PacienteViewModel>>(stringData);
+             HttpResponseMessage response = client.GetAsync
+         ("/api/Citas").Result;
+             string stringData = response.Content.
+         ReadAsStringAsync().Result;
+             List<CitasViewModel> data = JsonConvert.DeserializeObject
+         <List<CitasViewModel>>(stringData);
+
+
+            ApiUtil<List<TipoCitasViewModel>> apiUtil = new Utilitarios.ApiUtil<List<TipoCitasViewModel>>();
+            apiUtil.SeguridadApi(null, "/api/Citas", HttpContext.Session.GetString("token"));
+
+        
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
@@ -80,7 +85,7 @@ namespace MedicalSite.Controllers
                 strTable += "</table>";
 
                 ViewBag.Message = strTable;
-            }
+            }*/
 
             return View("Index");
         }

@@ -1,0 +1,33 @@
+﻿@model List<MedicalSite.Models.CitasViewModel>
+
+@{
+    ViewData["Title"] = "Listado de Citas";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="NuevaCita" asp-controller="Citas">Nueva Cita</a>
+</p>
+<table class="table">
+   
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idTipoCita)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreMedico)
+            </td>
+            <td>
+               <a asp-action="CancelarCita"asp-controller="Citas" asp-route-id="@item.idCita">Cancelar</a> |
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

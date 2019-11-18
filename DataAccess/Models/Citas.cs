@@ -9,7 +9,7 @@ namespace DataAccess.Models
         public string IdPaciente { get; set; }
         public decimal IdTipoCita { get; set; }
         public DateTime Fecha { get; set; }
-        public byte[] Estado { get; set; }
+        public bool Estado { get; set; }
         public string NombreMedico { get; set; }
 
         public virtual Paciente IdPacienteNavigation { get; set; }

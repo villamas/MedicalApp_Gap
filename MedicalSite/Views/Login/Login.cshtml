@@ -1,0 +1,32 @@
+﻿@model MedicalSite.Models.UsuarioViewModel
+
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+
+
+
+<div>
+    <form method="post">
+    <div>
+
+        <div class="form-group">
+            <label asp-for="Username" class="Control-label"></label>
+            <input asp-for="Username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="Control-label"></label>
+            <input asp-for="Password" type="password" class="form-control">
+        </div>
+        <div>
+            <button type="submit" asp-action="Login"
+                    asp-controller="Home">
+                Sign In
+            </button>
+
+        </div>
+    </div>
+</form>
+
+</div>

@@ -49,10 +49,8 @@ namespace DataAccess.Models
                     .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Estado)
-                    .IsRequired()
-                    .HasMaxLength(1)
-                    .IsFixedLength()
-                    .HasDefaultValueSql("((1))");
+                   .IsRequired()
+                   .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Fecha).HasColumnType("date");
 
