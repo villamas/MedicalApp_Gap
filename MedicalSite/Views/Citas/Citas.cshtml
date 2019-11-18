@@ -24,13 +24,20 @@
                 @Html.DisplayFor(modelItem => item.nombreMedico)
             </td>
             <td>
-                  <form method="post">
-               <a asp-action="Cancelar" type="submit" asp-controller="Citas" asp-route-id="@item.idCita">Cancelar</a>
-                      </form>
-       
+                <form method="post">
+                    <a asp-action="Cancelar" type="submit" asp-for="item.idPaciente" asp-controller="Citas" asp-route-id="@item.idPaciente">Cancelar</a>
+                </form>
+
                 
             </td>
         </tr>
+       
+
+        
 }
     </tbody>
 </table>
+
+
+
+<div> <h2>@Html.Raw(@ViewBag.Message)</h2></div>

@@ -34,31 +34,32 @@ namespace MedicalSite.Controllers
         {
             try
             {
-                string baseUrl = "https://localhost:5001";
-                HttpClient client = new HttpClient
+                string baseUrl = "http://localhost:5001";
+                using (HttpClient client = new HttpClient
                 {
                     BaseAddress = new Uri(baseUrl)
-                };
-                var contentType = new MediaTypeWithQualityHeaderValue
-            ("application/json");
-                client.DefaultRequestHeaders.Accept.Add(contentType);
+                })
+                {
+                    var contentType = new MediaTypeWithQualityHeaderValue
+("application/json");
+                    client.DefaultRequestHeaders.Accept.Add(contentType);
 
-                UsuarioViewModel userModel = new UsuarioViewModel();
-                userModel.Username = Username;
-                userModel.Password = password;
+                    UsuarioViewModel userModel = new UsuarioViewModel();
+                    userModel.Username = Username;
+                    userModel.Password = password;
 
-                string stringData = JsonConvert.SerializeObject(userModel);
-                var contentData = new StringContent(stringData,
-            System.Text.Encoding.UTF8, "application/json");
+                    string stringData = JsonConvert.SerializeObject(userModel);
+                    var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PostAsync
-            ("/api/seguridad/authenticate", contentData).Result;
-                string stringJWT = response.Content.
-            ReadAsStringAsync().Result;
-                Utilitarios.JWT jwt = JsonConvert.DeserializeObject
-            <Utilitarios.JWT>(stringJWT);
+                    HttpResponseMessage response = client.PostAsync
+                ("/api/seguridad/authenticate", contentData).Result;
+                    string stringJWT = response.Content.
+                ReadAsStringAsync().Result;
+                    Utilitarios.JWT jwt = JsonConvert.DeserializeObject
+                <Utilitarios.JWT>(stringJWT);
 
-                HttpContext.Session.SetString("token", jwt.Token);
+                    HttpContext.Session.SetString("token", jwt.Token);
+                }
 
                 ViewBag.Message = "User logged in successfully!";
 

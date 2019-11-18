@@ -7,35 +7,36 @@
 
             <div class="form-group">
                 <label asp-for="Item1.idPaciente" class="Control-label"></label>
-                
-     
+
+
                 @Html.TextBoxFor(model => model.Item1.idPaciente)
             </div>
 
             <div class="form-group">
-                   <label asp-for="Item1.idTipoCita" class="Control-label"></label>
-                
+                <label asp-for="Item1.idTipoCita" class="Control-label"></label>
+
                 <div class="col-md-10">
                     <select asp-for="Item1.idTipoCita" asp-items="@Model.Item2"></select>
                 </div>
             </div>
             <div class="form-group">
-                                   <label asp-for="Item1.nombreMedico" class="Control-label"></label>
-      
-             @Html.TextBoxFor(model => model.Item1.nombreMedico)
-            </div>          
+                <label asp-for="Item1.nombreMedico" class="Control-label"></label>
+
+                @Html.TextBoxFor(model => model.Item1.nombreMedico)
+            </div>
             <div class="form-group">
-                        <label class="control-label col-md-2" asp-for="Item1.fecha" />
-                       <label asp-for="Item1.fecha" class="Control-label"></label>
-                <input  type="date" asp-for="Item1.fecha" class="form-control">
+                <label class="control-label col-md-2" asp-for="Item1.fecha" />
+                <label asp-for="Item1.fecha" class="Control-label"></label>
+                <input type="date" asp-for="Item1.fecha" class="form-control">
             </div>
             <div>
                 <button type="submit" asp-action="GuardaCita"
-                        asp-controller="Citas">
+                        asp-controller="Citas" asp-route-id="model => model.Item1.idPaciente">
                     Guardar Cita
                 </button>
 
             </div>
+            <h2>@Html.Raw(@ViewBag.Message)</h2>
         </div>
     </form>
     </div>

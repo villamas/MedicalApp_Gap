@@ -60,11 +60,12 @@ namespace MedicalAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<ActionResult> PostAsync([FromBody] Citas citas)
+        [Route("[action]")]
+        public async Task<ActionResult> AgregaCitaAsync([FromBody] Citas citas)
         {
             dynamic model = new ExpandoObject();
             // model.Citas = this._UOW.CitasRepository.GetAll();
-            var dato = this._UOW.CitasRepository.GetAll().Where(x => x.Estado && x.Fecha.Equals(citas.Fecha) && x.IdPaciente.Equals(citas.IdPaciente)).ToList();
+            var dato = this._UOW.CitasRepository.GetAll().Where(x => x.Estado && x.Fecha.Equals(citas.Fecha.Date) && x.IdPaciente.Equals(citas.IdPaciente)).ToList();
           //  where c.Estado.Equals(true) && c.
             //           select c;
 
