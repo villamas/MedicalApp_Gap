@@ -6,9 +6,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalSite", "MedicalSite\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalAPI", "MedicalAPI\MedicalAPI.csproj", "{D1A11FFB-8A65-4449-A4DD-0DBDB3ACA84E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{56DA02AE-6420-4B81-8473-677800B4BC61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{56DA02AE-6420-4B81-8473-677800B4BC61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalRepos", "MedicalRepos\MedicalRepos.csproj", "{565410B0-44FC-4A73-9291-C67817E25043}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalRepos", "MedicalRepos\MedicalRepos.csproj", "{565410B0-44FC-4A73-9291-C67817E25043}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

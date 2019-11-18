@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    <a asp-action="NuevaCita" asp-controller="Citas">Nueva Cita</a>
+    <a asp-action="NuevaCita" >Nueva Cita</a>
 </p>
 <table class="table">
    
@@ -24,9 +24,9 @@
                 @Html.DisplayFor(modelItem => item.nombreMedico)
             </td>
             <td>
-                <form method="post">
-                    <a asp-action="Cancelar" type="submit" asp-for="item.idPaciente" asp-controller="Citas" asp-route-id="@item.idPaciente">Cancelar</a>
-                </form>
+                
+                    <a asp-action="Cancelar" type="submit" asp-controller="Citas"  asp-route-id="@item.idPaciente">Cancelar</a>
+             
 
                 
             </td>
