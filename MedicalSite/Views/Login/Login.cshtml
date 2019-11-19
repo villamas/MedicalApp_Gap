@@ -6,21 +6,20 @@
 
 
 
-
 <div>
     <form method="post">
     <div>
 
         <div class="form-group">
             <label asp-for="Username" class="Control-label"></label>
-            <input asp-for="Username" class="form-control" />
+            <input asp-for="Username" id="Username" class="form-control" />
         </div>
         <div class="form-group">
             <label asp-for="Password" class="Control-label"></label>
-            <input asp-for="Password" type="password" class="form-control">
+            <input asp-for="Password" id="Password" type="password" class="form-control">
         </div>
         <div>
-            <button type="submit" asp-action="Login"
+             <button type="submit" asp-action="Login"
                     asp-controller="Home">
                 Sign In
             </button>
@@ -28,5 +27,6 @@
         </div>
     </div>
 </form>
-
+     <label id="postResult"></label>
+    <h2>@Html.Raw(@ViewBag.Message)</h2>
 </div>

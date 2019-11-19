@@ -73,6 +73,28 @@ namespace MedicalSite.Controllers
             
         }
 
+        public IActionResult Login2(string Tokenjs)
+        {
+            try
+            {
+               
+                    Utilitarios.JWT jwt = JsonConvert.DeserializeObject
+                <Utilitarios.JWT>(Tokenjs);
+
+                    HttpContext.Session.SetString("token", jwt.Token);
+                
+
+                ViewBag.Message = "User logged in successfully!";
+
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error al Loguear!";
+                return View("../Login/Login");
+            }
+
+        }
 
         public IActionResult Loguear()
         {
